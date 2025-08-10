@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bd_usuarios
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: msvc-usuarios-db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  springboot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: msvc-usuarios
+    depends_on:
+      - mysql
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+volumes:
+  mysql_data:
