@@ -12,6 +12,7 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource dataSource() {
+        System.out.println("MYSQL_URL: " + System.getenv("MYSQL_URL"));
         String rawUrl = System.getenv("MYSQL_URL"); // Ej: mysql://user:pass@host:port/dbname
         if (rawUrl == null || !rawUrl.startsWith("mysql://")) {
             throw new RuntimeException("MYSQL_URL no está definido o tiene formato incorrecto");
