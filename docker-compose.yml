@@ -1,16 +1,16 @@
-version: '3.8'
-
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: bd_usuarios
+  postgres:
+    image: postgres:16
+    container_name: my_postgres
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: msvc-usuarios-db
+      POSTGRES_DB: msvc-usuarios
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
     ports:
-      - "3307:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
 
   springboot-app:
     build:
@@ -18,10 +18,11 @@ services:
       dockerfile: Dockerfile
     container_name: msvc-usuarios
     depends_on:
-      - mysql
+      - postgres
     ports:
-      - "8081:8081"
+      - "8080:8080"
     env_file:
       - .env
+
 volumes:
-  mysql_data:
+  postgres_data:
