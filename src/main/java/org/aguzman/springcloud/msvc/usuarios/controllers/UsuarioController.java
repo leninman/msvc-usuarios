@@ -21,18 +21,10 @@ public class UsuarioController {
     private UsuarioService service;
 
 
-    //@GetMapping
-    //public Map<String,List<Usuario>> listar() {
-     //   return Collections.singletonMap("users",service.listar());
-    //}
-
-    @GetMapping("/")
-        public String healthCheck() {
-            return "Servicio activo 🚀";
-        }
-
-
-
+    @GetMapping
+    public Map<String,List<Usuario>> listar() {
+        return Collections.singletonMap("users",service.listar());
+    }
 
 
 
