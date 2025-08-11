@@ -12,7 +12,7 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource dataSource() {
-        System.out.println("Mysql: " + System.getenv("Mysql"));
+        System.out.println("MYSQL_URL: " + System.getenv("MYSQL_URL"));
         System.getenv().forEach((key, value) -> {
             System.out.println(key + " = " + value);
         });
