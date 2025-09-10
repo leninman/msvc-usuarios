@@ -14,4 +14,5 @@ public interface UsuarioService {
 
     Optional<Usuario> porEmail(String email);
     boolean existePorEmail(String email);
+    Usuario emailExist(String email);
 }

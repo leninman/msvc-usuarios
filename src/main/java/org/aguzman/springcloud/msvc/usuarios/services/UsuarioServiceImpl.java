@@ -56,4 +56,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     public boolean existePorEmail(String email) {
         return repository.existsByEmail(email);
     }
+
+    @Override
+    public Usuario emailExist(String email) {
+        return repository.emailExist(email);
+
+    }
 }

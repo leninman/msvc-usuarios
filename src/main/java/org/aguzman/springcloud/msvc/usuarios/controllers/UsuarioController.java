@@ -44,7 +44,7 @@ public class UsuarioController {
             return validar(result);
         }
 
-        if (service.existePorEmail(usuario.getEmail())) {
+        if (service.emailExist(usuario.getEmail())!=null) {
             return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", "Ese correo ya esta siendo utlizado por otro usuario!"));
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.guardar(usuario));
@@ -60,11 +60,18 @@ public class UsuarioController {
         Optional<Usuario> o = service.porId(id);
         if (o.isPresent()) {
             Usuario usuarioDb = o.get();
-            if (!usuario.getEmail().equalsIgnoreCase(usuarioDb.getEmail())) {
+            if(!usuario.getEmail().equals(usuarioDb.getEmail()) && service.emailExist(usuario.getEmail())!=null){
                 return ResponseEntity.badRequest()
                         .body(Collections
                                 .singletonMap("mensaje", "No puede utilizar este correo electronico ya que otro usuario lo tiene asignado, por favor indique otro!"));
+
             }
+           /* if (!usuario.getEmail().equalsIgnoreCase(usuarioDb.getEmail())) {
+                return ResponseEntity.badRequest()
+                        .body(Collections
+                                .singletonMap("mensaje", "No puede utilizar este correo electronico ya que otro usuario lo tiene asignado, por favor indique otro!"));
+            }*/
+
 
             usuarioDb.setNombre(usuario.getNombre());
             usuarioDb.setEmail(usuario.getEmail());

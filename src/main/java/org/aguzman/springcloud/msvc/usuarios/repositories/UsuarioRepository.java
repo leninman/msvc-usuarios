@@ -14,4 +14,8 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
     boolean existsByEmail(String email);
 
+    @Query("select u from Usuario u where u.email=?1")
+    Usuario emailExist(String email);
+
+
 }
